@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp">
+
+    <ImageView
+        android:id="@+id/iv_user"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:src="@drawable/user1"/>
+
+    <TextView
+        android:id="@+id/tv_usernameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_toRightOf="@id/iv_user"
+        android:fontFamily="monospace"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="dhandyjoe" />
+
+    <TextView
+        android:id="@+id/tv_nameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_usernameUser"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@id/iv_user"
+        android:fontFamily="monospace"
+        android:textSize="10sp"
+        tools:text="Dhandy Joenathan" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_user"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@id/iv_user"
+        android:fontFamily="monospace"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        tools:text="Google, Inc." />
+
+
+</RelativeLayout>
