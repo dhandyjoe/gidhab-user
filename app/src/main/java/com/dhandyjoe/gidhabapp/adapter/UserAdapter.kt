@@ -1,10 +1,11 @@
-package com.dhandyjoe.gidhabapp
+package com.dhandyjoe.gidhabapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.databinding.ItemUserBinding
 
 class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {

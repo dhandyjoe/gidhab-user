@@ -1,9 +1,12 @@
-package com.dhandyjoe.gidhabapp
+package com.dhandyjoe.gidhabapp.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dhandyjoe.gidhabapp.DETAIL_USER
+import com.dhandyjoe.gidhabapp.model.User
+import com.dhandyjoe.gidhabapp.adapter.UserAdapter
 import com.dhandyjoe.gidhabapp.databinding.ActivityMainBinding
 import org.json.JSONException
 import org.json.JSONObject
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         val data = UserAdapter(userList, this)
         binding.rvUser.adapter = data
 
-        data.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+        data.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: User) {
                 val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
                 intent.putExtra(DETAIL_USER, data)

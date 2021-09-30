@@ -1,8 +1,10 @@
-package com.dhandyjoe.gidhabapp
+package com.dhandyjoe.gidhabapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.dhandyjoe.gidhabapp.DETAIL_USER
+import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.databinding.ActivityDetailUserBinding
 
 class DetailUserActivity : AppCompatActivity() {
