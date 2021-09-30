@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbar.title = "Gidhab User"
-
         userList = ArrayList()
 
         try {
@@ -66,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // function to read json file from assets
     private fun getJsonDataFromAsset(): String? {
         var jsonString: String? = null
         val charset = Charsets.UTF_8

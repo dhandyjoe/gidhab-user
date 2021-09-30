@@ -17,6 +17,7 @@ class DetailUserActivity : AppCompatActivity() {
 
         binding.toolbarDetails.title = "Details User"
 
+        // get user single data
         val user = intent.getParcelableExtra<User>(DETAIL_USER)
         Glide.with(this)
             .load(getImage(user!!.avatar))
@@ -32,5 +33,6 @@ class DetailUserActivity : AppCompatActivity() {
         binding.tvLocation.text = user.location
     }
 
+    // function for generate image
     fun getImage(imageName: String?): Int  = this.resources.getIdentifier(imageName, "drawable", this.packageName)
 }

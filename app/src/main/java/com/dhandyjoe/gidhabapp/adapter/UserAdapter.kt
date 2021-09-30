@@ -45,5 +45,6 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
         fun onItemClicked(data: User)
     }
 
+    // function to generate image
     fun getImage(imageName: String?): Int  = context.resources.getIdentifier(imageName, "drawable", context.packageName)
 }
