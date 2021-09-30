@@ -8,19 +8,17 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_details"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        style="@style/ToolbarApp"
         android:background="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="#808080" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_detail"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="128dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,11 +52,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:backgroundTint="#C8C6C6"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
+        style="@style/CardViewUserDetails1"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -70,6 +65,7 @@
             android:layout_height="wrap_content"
             android:text="Follower"
             android:textColor="#fff"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -85,11 +81,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:backgroundTint="#F0E5CF"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
+        style="@style/CardViewUserDetails1"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -101,6 +94,7 @@
             android:layout_height="wrap_content"
             android:text="Following"
             android:textColor="#8E8E8E"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -116,12 +110,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="#F7F6F2"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
+        style="@style/CardViewUserDetails1"
         app:layout_constraintEnd_toStartOf="@+id/cardView3"
         app:layout_constraintStart_toEndOf="@+id/cardView2"
         app:layout_constraintTop_toBottomOf="@+id/tv_companyDetail">
@@ -131,6 +122,7 @@
             android:layout_height="wrap_content"
             android:text="Repository"
             android:textColor="#5F5A5A"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -146,12 +138,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView5"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        style="@style/CardViewUserDetails2"
         android:layout_marginTop="30dp"
         android:backgroundTint="#4B6587"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toStartOf="@+id/cardView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -161,6 +150,7 @@
             android:layout_height="wrap_content"
             android:text="Name"
             android:textColor="#fff"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -177,11 +167,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
         android:backgroundTint="#899FBC"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
+        style="@style/CardViewUserDetails2"
         app:layout_constraintBottom_toBottomOf="@+id/cardView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView5"
@@ -191,6 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location"
+            android:layout_marginTop="8dp"
             android:textColor="#fff"
             android:layout_gravity="center_horizontal"/>
 

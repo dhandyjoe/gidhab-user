@@ -8,10 +8,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
         android:background="@color/purple_500"
-        app:titleTextColor="#808080"
+        style="@style/ToolbarApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +18,7 @@
         android:id="@+id/rv_user"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="15dp"
+        android:padding="20dp"
         tools:listitem="@layout/item_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
