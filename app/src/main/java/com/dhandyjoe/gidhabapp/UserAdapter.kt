@@ -10,6 +10,12 @@ import com.dhandyjoe.gidhabapp.databinding.ItemUserBinding
 class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private class MyViewHolder(val binding: ItemUserBinding): RecyclerView.ViewHolder(binding.root)
 
+    // code clickListener
+    private lateinit var onItemClickCallback: OnItemClickCallback
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(ItemUserBinding.inflate(LayoutInflater.from(context), parent, false))
     }
@@ -25,10 +31,18 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
             holder.binding.tvUsernameUser.text = model.username
             holder.binding.tvNameUser.text = model.name
             holder.binding.tvCompanyUser.text = model.company
+            holder.itemView.setOnClickListener {
+                onItemClickCallback.onItemClicked(data[position])
+            }
         }
     }
 
     override fun getItemCount(): Int = data.size
+
+    // add interface
+    interface OnItemClickCallback {
+        fun onItemClicked(data: User)
+    }
 
     fun getImage(imageName: String?): Int  = context.resources.getIdentifier(imageName, "drawable", context.packageName)
 }
