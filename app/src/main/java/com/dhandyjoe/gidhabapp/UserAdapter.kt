@@ -19,6 +19,9 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
 
         if (holder is MyViewHolder) {
             Glide.with(holder.itemView.context)
+                .load(getImage(model.avatar))
+                .circleCrop()
+                .into(holder.binding.ivUser)
             holder.binding.tvUsernameUser.text = model.username
             holder.binding.tvNameUser.text = model.name
             holder.binding.tvCompanyUser.text = model.company
@@ -26,4 +29,6 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
     }
 
     override fun getItemCount(): Int = data.size
+
+    fun getImage(imageName: String?): Int  = context.resources.getIdentifier(imageName, "drawable", context.packageName)
 }

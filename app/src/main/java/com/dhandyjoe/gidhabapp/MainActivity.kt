@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.gidhabapp.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.lang.Exception
@@ -27,10 +28,31 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbar.title = "Gidhab User's"
 
-        // read JSON file using GSOn
-        val jsonFile = getJsonDataFromAsset(this, "githubuser.json")
-        val gson = Gson()
-        val user: User = gson.fromJson(jsonFile, User::class.java)
+        userList = ArrayList()
+
+        try {
+            val obj = JSONObject(getJsonDataFromAsset()!!)
+            val userArray = obj.getJSONArray("users")
+
+            for (i in 0 until userArray.length()) {
+                val user = userArray.getJSONObject(i)
+
+                val username = user.getString("username")
+                val name = user.getString("name")
+                val avatar = user.getString("avatar")
+                val company = user.getString("company")
+                val location = user.getString("location")
+                val repository = user.getInt("repository")
+                val follower = user.getInt("follower")
+                val following = user.getInt("following")
+
+                val userDetails = User(username, name, avatar, company, location, repository, follower, following)
+
+                userList.add(userDetails)
+            }
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
 
         showRecycleView()
     }
@@ -41,10 +63,16 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.adapter = data
     }
 
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        val jsonString: String
+    private fun getJsonDataFromAsset(): String? {
+        var jsonString: String? = null
+        val charset = Charsets.UTF_8
         try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
+            val myUserJSonFile = assets.open("githubuser.json")
+            val size = myUserJSonFile.available()
+            val buffer = ByteArray(size)
+            myUserJSonFile.read(buffer)
+            myUserJSonFile.close()
+            jsonString = String(buffer, charset)
         } catch (ioException: IOException) {
             ioException.printStackTrace()
             return null

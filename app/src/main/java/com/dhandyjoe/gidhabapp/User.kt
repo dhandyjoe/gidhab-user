@@ -6,7 +6,7 @@ import android.os.Parcelable
 data class User (
     val username: String?,
     val name: String?,
-    val avatar: Int,
+    val avatar: String?,
     val company: String?,
     val location: String?,
     val repository: Int,
@@ -16,7 +16,7 @@ data class User (
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
@@ -28,7 +28,7 @@ data class User (
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(username)
         parcel.writeString(name)
-        parcel.writeInt(avatar)
+        parcel.writeString(avatar)
         parcel.writeString(company)
         parcel.writeString(location)
         parcel.writeInt(repository)

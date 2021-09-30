@@ -33,19 +33,19 @@
         android:layout_marginTop="3dp"
         android:layout_toEndOf="@id/iv_user"
         android:fontFamily="monospace"
-        android:textSize="10sp"
+        android:textSize="13sp"
         tools:text="Dhandy Joenathan" />
 
     <TextView
         android:id="@+id/tv_companyUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/iv_user"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="5dp"
         android:layout_toRightOf="@id/iv_user"
+        android:layout_below="@id/tv_nameUser"
+        android:layout_marginTop="10dp"
         android:fontFamily="monospace"
-        android:textSize="10sp"
+        android:textSize="13sp"
         android:textStyle="italic"
         tools:text="Google, Inc." />
 
