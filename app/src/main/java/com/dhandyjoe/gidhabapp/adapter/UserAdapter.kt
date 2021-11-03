@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.databinding.ItemUserBinding
 
@@ -25,13 +26,12 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
         val model = data[position]
 
         if (holder is MyViewHolder) {
-            Glide.with(holder.itemView.context)
-                .load(getImage(model.avatar))
+            Glide.with(holder.itemView)
+                .load(model.avatar_url)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .circleCrop()
-                .into(holder.binding.ivUser)
-            holder.binding.tvUsernameUser.text = model.username
-            holder.binding.tvNameUser.text = model.name
-            holder.binding.tvCompanyUser.text = model.company
+                .into(holder.binding.ivProfileUser)
+            holder.binding.tvUsernameUser.text = model.login
             holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data[position])
             }

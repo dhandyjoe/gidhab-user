@@ -7,56 +7,28 @@
     android:layout_marginBottom="15dp">
 
     <ImageView
-        android:id="@+id/iv_user"
+        android:id="@+id/iv_profileUser"
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/user1" />
+        tools:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/tv_usernameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_user"
+        android:layout_toRightOf="@id/iv_profileUser"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:fontFamily="monospace"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_user"
+        app:layout_constraintStart_toEndOf="@+id/iv_profileUser"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="dhandyjoe" />
-
-    <TextView
-        android:id="@+id/tv_nameUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_usernameUser"
-        android:layout_toEndOf="@id/iv_user"
-        android:fontFamily="monospace"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_user"
-        app:layout_constraintTop_toBottomOf="@+id/tv_usernameUser"
-        tools:text="Dhandy Joenathan" />
-
-    <TextView
-        android:id="@+id/tv_companyUser"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_below="@id/tv_nameUser"
-        android:layout_marginStart="10dp"
-        android:layout_toRightOf="@id/iv_user"
-        android:fontFamily="monospace"
-        android:textSize="13sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/iv_user"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nameUser"
-        tools:text="Google, Inc." />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

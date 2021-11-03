@@ -3,14 +3,16 @@ package com.dhandyjoe.gidhabapp.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.gidhabapp.DETAIL_USER
 import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.adapter.UserAdapter
+import com.dhandyjoe.gidhabapp.api.RetrofitClient
 import com.dhandyjoe.gidhabapp.databinding.ActivityMainBinding
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
+import com.dhandyjoe.gidhabapp.model.UserResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,36 +24,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbar.title = "Gidhab User"
-        userList = ArrayList()
-
-        try {
-            val obj = JSONObject(getJsonDataFromAsset()!!)
-            val userArray = obj.getJSONArray("users")
-
-            for (i in 0 until userArray.length()) {
-                val user = userArray.getJSONObject(i)
-
-                val username = user.getString("username")
-                val name = user.getString("name")
-                val avatar = user.getString("avatar")
-                val company = user.getString("company")
-                val location = user.getString("location")
-                val repository = user.getInt("repository")
-                val follower = user.getInt("follower")
-                val following = user.getInt("following")
-
-                val userDetails = User(username, name, avatar, company, location, repository, follower, following)
-
-                userList.add(userDetails)
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
+        binding.btn.setOnClickListener {
+            showUsers(binding.svUsers.text.toString())
         }
-
-        showRecycleView()
     }
 
-    private fun showRecycleView() {
+    private fun showRecycleView(userList: ArrayList<User>) {
         binding.rvUser.layoutManager = LinearLayoutManager(this)
         val data = UserAdapter(userList, this)
         binding.rvUser.adapter = data
@@ -59,27 +37,28 @@ class MainActivity : AppCompatActivity() {
         data.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: User) {
                 val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
-                intent.putExtra(DETAIL_USER, data)
+                intent.putExtra(DetailUserActivity.NAME, data.login)
                 startActivity(intent)
             }
         })
     }
 
-    // function to read json file from assets
-    private fun getJsonDataFromAsset(): String? {
-        var jsonString: String? = null
-        val charset = Charsets.UTF_8
-        try {
-            val myUserJSonFile = assets.open("githubuser.json")
-            val size = myUserJSonFile.available()
-            val buffer = ByteArray(size)
-            myUserJSonFile.read(buffer)
-            myUserJSonFile.close()
-            jsonString = String(buffer, charset)
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return null
-        }
-        return jsonString
+    private fun showUsers(query: String) {
+        RetrofitClient.apiInstance.getUser(query)
+            .enqueue(object : Callback<UserResponse>{
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val data = response.body()?.items
+                        showRecycleView(data!!)
+                    }
+                }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    Log.d("Failed", "Gagal")
+                }
+            })
     }
 }
