@@ -91,6 +91,8 @@ class FollowingFragment : Fragment() {
                     response: Response<ArrayList<User>>
                 ) {
                     val data = response.body()
+                    binding.pbLoading.visibility = View.GONE
+                    binding.rvFollowing.visibility = View.VISIBLE
                     showRecycleView(data!!)
                 }
 

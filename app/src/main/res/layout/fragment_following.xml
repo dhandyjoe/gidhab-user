@@ -10,6 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
-        tools:listitem="@layout/item_user"/>
+        android:visibility="invisible"
+        tools:listitem="@layout/item_user" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:visibility="visible"/>
 
 </FrameLayout>
