@@ -3,6 +3,7 @@ package com.dhandyjoe.gidhabapp.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -40,8 +41,8 @@ class DetailUserActivity : AppCompatActivity() {
         Log.d("tesUsernameDetail", username!!)
 
         showDetailUsers(username)
-        showFollowers(username)
-        showFollowing(username)
+        showFollowersIndicator(username)
+        showFollowingIndicator(username)
 
         val sectionsPagerAdapter = SectionPagerAdapter(this, username)
         val viewPager: ViewPager2 = binding.viewPager
@@ -70,12 +71,12 @@ class DetailUserActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<DetailUser>, t: Throwable) {
-                TODO("Not yet implemented")
+                Toast.makeText(this@DetailUserActivity, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun showFollowers(query: String) {
+    private fun showFollowersIndicator(query: String) {
         RetrofitClient.apiInstance.getListFollowers(query)
             .enqueue(object : Callback<ArrayList<User>> {
                 override fun onResponse(
@@ -87,12 +88,12 @@ class DetailUserActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(this@DetailUserActivity, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
-    private fun showFollowing(query: String) {
+    private fun showFollowingIndicator(query: String) {
         RetrofitClient.apiInstance.getListFollowing(query)
             .enqueue(object : Callback<ArrayList<User>> {
                 override fun onResponse(
@@ -104,7 +105,7 @@ class DetailUserActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(this@DetailUserActivity, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
                 }
             })
     }

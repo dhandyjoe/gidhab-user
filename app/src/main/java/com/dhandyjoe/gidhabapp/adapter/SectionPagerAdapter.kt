@@ -17,7 +17,7 @@ class SectionPagerAdapter(activity: AppCompatActivity, private val data: String)
         val followingFragment = FollowingFragment()
 
         var fragment: Fragment? = null
-        var bundle = Bundle()
+        val bundle = Bundle()
         bundle.putString("username", data)
 
         followerFragment.arguments = bundle

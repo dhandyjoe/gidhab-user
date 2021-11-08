@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.adapter.UserAdapter
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                    Log.d("Failed", "Gagal")
+                    Toast.makeText(this@MainActivity, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
                 }
             })
     }
