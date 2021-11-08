@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.databinding.ItemUserBinding
 
-class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserAdapter(val data: ArrayList<User>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private class MyViewHolder(val binding: ItemUserBinding): RecyclerView.ViewHolder(binding.root)
 
     // code clickListener
@@ -19,7 +19,7 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(ItemUserBinding.inflate(LayoutInflater.from(context), parent, false))
+        return MyViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -45,6 +45,4 @@ class UserAdapter(val data: ArrayList<User>, val context: Context): RecyclerView
         fun onItemClicked(data: User)
     }
 
-    // function to generate image
-    fun getImage(imageName: String?): Int  = context.resources.getIdentifier(imageName, "drawable", context.packageName)
 }

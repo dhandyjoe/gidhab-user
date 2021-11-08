@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showRecycleView(userList: ArrayList<User>) {
         binding.rvUser.layoutManager = LinearLayoutManager(this)
-        val data = UserAdapter(userList, this)
+        val data = UserAdapter(userList)
         binding.rvUser.adapter = data
 
         data.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {

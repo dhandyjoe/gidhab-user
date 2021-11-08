@@ -19,4 +19,13 @@ interface Api {
         @Path("username") username: String
     ): Call<DetailUser>
 
+    @GET("users/{username}/followers")
+    fun getListFollowers (
+        @Path("username") username: String
+    ): Call<ArrayList<User>>
+
+    @GET("users/{username}/following")
+    fun getListFollowing (
+        @Path("username") username: String
+    ): Call<ArrayList<User>>
 }

@@ -6,14 +6,12 @@ import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dhandyjoe.gidhabapp.DETAIL_USER
+
 import com.dhandyjoe.gidhabapp.R
 import com.dhandyjoe.gidhabapp.api.RetrofitClient
-import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.databinding.ActivityDetailUserBinding
 import com.dhandyjoe.gidhabapp.model.DetailUser
-import com.dhandyjoe.gidhabapp.model.UserResponse
-import com.dhandyjoe.gidhabapp.utils.SectionPagerAdapter
+import com.dhandyjoe.gidhabapp.adapter.SectionPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
@@ -39,9 +37,11 @@ class DetailUserActivity : AppCompatActivity() {
         binding.toolbarDetails.title = "Details User"
         val username = intent.getStringExtra(NAME)
 
-        showDetailUsers(username!!)
+        Log.d("tesUsernameDetail", username!!)
 
-        val sectionsPagerAdapter = SectionPagerAdapter(this)
+        showDetailUsers(username)
+
+        val sectionsPagerAdapter = SectionPagerAdapter(this, username)
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs

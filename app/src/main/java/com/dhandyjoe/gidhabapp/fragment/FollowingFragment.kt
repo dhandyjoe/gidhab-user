@@ -1,12 +1,22 @@
 package com.dhandyjoe.gidhabapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.gidhabapp.R
+import com.dhandyjoe.gidhabapp.activity.DetailUserActivity
+import com.dhandyjoe.gidhabapp.activity.MainActivity
+import com.dhandyjoe.gidhabapp.adapter.UserAdapter
+import com.dhandyjoe.gidhabapp.api.RetrofitClient
 import com.dhandyjoe.gidhabapp.databinding.FragmentFollowingBinding
+import com.dhandyjoe.gidhabapp.model.User
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +33,7 @@ class FollowingFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentFollowingBinding
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +47,12 @@ class FollowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val args = arguments?.getString("username")
         binding = FragmentFollowingBinding.inflate(inflater, container,false)
 
+
+        Log.d("tesUsername", "ini di following = ${args!!}")
+        showUsers(args)
 
         return binding.root
     }
@@ -60,5 +75,28 @@ class FollowingFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun showRecycleView(userList: ArrayList<User>) {
+        binding.rvFollowing.layoutManager = LinearLayoutManager(activity)
+        val data = UserAdapter(userList)
+        binding.rvFollowing.adapter = data
+    }
+
+    private fun showUsers(query: String) {
+        RetrofitClient.apiInstance.getListFollowing(query)
+            .enqueue(object : Callback<ArrayList<User>> {
+                override fun onResponse(
+                    call: Call<ArrayList<User>>,
+                    response: Response<ArrayList<User>>
+                ) {
+                    val data = response.body()
+                    showRecycleView(data!!)
+                }
+
+                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 }

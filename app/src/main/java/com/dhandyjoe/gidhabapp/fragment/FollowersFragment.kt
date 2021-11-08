@@ -1,11 +1,20 @@
 package com.dhandyjoe.gidhabapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dhandyjoe.gidhabapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dhandyjoe.gidhabapp.activity.DetailUserActivity
+import com.dhandyjoe.gidhabapp.adapter.UserAdapter
+import com.dhandyjoe.gidhabapp.api.RetrofitClient
+import com.dhandyjoe.gidhabapp.databinding.FragmentFollowersBinding
+import com.dhandyjoe.gidhabapp.model.User
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +30,8 @@ class FollowersFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: FragmentFollowersBinding
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +45,14 @@ class FollowersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_followers, container, false)
+        val args = arguments?.getString("username")
+
+        binding = FragmentFollowersBinding.inflate(inflater, container, false)
+
+        Log.d("tesUsername", args!!)
+        showUsers(args)
+
+        return binding.root
     }
 
     companion object {
@@ -49,12 +66,35 @@ class FollowersFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String) =
             FollowersFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun showRecycleView(userList: ArrayList<User>) {
+        binding.rvFollowers.layoutManager = LinearLayoutManager(activity)
+        val data = UserAdapter(userList)
+        binding.rvFollowers.adapter = data
+    }
+
+    private fun showUsers(query: String) {
+        RetrofitClient.apiInstance.getListFollowers(query)
+            .enqueue(object : Callback<ArrayList<User>> {
+                override fun onResponse(
+                    call: Call<ArrayList<User>>,
+                    response: Response<ArrayList<User>>
+                ) {
+                    val data = response.body()
+                    showRecycleView(data!!)
+                }
+
+                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 }
