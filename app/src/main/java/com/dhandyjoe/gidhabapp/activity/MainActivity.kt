@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.adapter.UserAdapter
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbar.title = "Gidhab User"
         binding.btn.setOnClickListener {
+            binding.tvStatusData.visibility = View.GONE
+            binding.pbLoading.visibility = View.VISIBLE
             showUsers(binding.svUsers.text.toString())
         }
     }
@@ -51,7 +54,9 @@ class MainActivity : AppCompatActivity() {
                     response: Response<UserResponse>
                 ) {
                     if (response.isSuccessful) {
+                        binding.pbLoading.visibility = View.GONE
                         val data = response.body()?.items
+                        binding.rvUser.visibility = View.VISIBLE
                         showRecycleView(data!!)
                     }
                 }

@@ -15,12 +15,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.45"
+        android:contentDescription="@string/app_image" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gidhab App"
+        android:text="@string/name_app"
         android:layout_marginTop="25dp"
         android:textSize="25sp"
         android:textStyle="bold"

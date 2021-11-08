@@ -6,12 +6,12 @@ import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-
 import com.dhandyjoe.gidhabapp.R
 import com.dhandyjoe.gidhabapp.api.RetrofitClient
 import com.dhandyjoe.gidhabapp.databinding.ActivityDetailUserBinding
 import com.dhandyjoe.gidhabapp.model.DetailUser
 import com.dhandyjoe.gidhabapp.adapter.SectionPagerAdapter
+import com.dhandyjoe.gidhabapp.model.User
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
@@ -40,6 +40,8 @@ class DetailUserActivity : AppCompatActivity() {
         Log.d("tesUsernameDetail", username!!)
 
         showDetailUsers(username)
+        showFollowers(username)
+        showFollowing(username)
 
         val sectionsPagerAdapter = SectionPagerAdapter(this, username)
         val viewPager: ViewPager2 = binding.viewPager
@@ -71,5 +73,39 @@ class DetailUserActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    private fun showFollowers(query: String) {
+        RetrofitClient.apiInstance.getListFollowers(query)
+            .enqueue(object : Callback<ArrayList<User>> {
+                override fun onResponse(
+                    call: Call<ArrayList<User>>,
+                    response: Response<ArrayList<User>>
+                ) {
+                    val data = response.body()
+                    binding.tvFollowers.text = "${data?.size} followers"
+                }
+
+                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
+    private fun showFollowing(query: String) {
+        RetrofitClient.apiInstance.getListFollowing(query)
+            .enqueue(object : Callback<ArrayList<User>> {
+                override fun onResponse(
+                    call: Call<ArrayList<User>>,
+                    response: Response<ArrayList<User>>
+                ) {
+                    val data = response.body()
+                    binding.tvFollowing.text = "${data?.size} following"
+                }
+
+                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 }
