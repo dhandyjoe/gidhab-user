@@ -21,12 +21,14 @@ class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
     private var db = SQLiteDatabase(this)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbar.title = "Favorite User"
+
 
         val getFavorite = db.getFavoriteMovie()
         Log.d("cek", getFavorite.toString())
@@ -51,5 +53,4 @@ class FavoriteActivity : AppCompatActivity() {
             }
         })
     }
-
 }
