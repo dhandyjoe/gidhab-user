@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GidhabApp">
         <activity
+            android:name=".activity.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.FavoriteActivity"
             android:exported="false" />
         <activity

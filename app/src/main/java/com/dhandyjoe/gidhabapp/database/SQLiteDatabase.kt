@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.dhandyjoe.gidhabapp.model.DetailUser
+import com.dhandyjoe.gidhabapp.model.User
 
 class SQLiteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -70,8 +71,8 @@ class SQLiteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         return result
     }
 
-    fun getFavoriteMovie(): ArrayList<DetailUser>{
-        val favoriteUser = ArrayList<DetailUser>()
+    fun getFavoriteMovie(): ArrayList<User>{
+        val favoriteUser = ArrayList<User>()
         val db = this.readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
 
@@ -79,7 +80,7 @@ class SQLiteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
         if(cursor.moveToFirst()) {
             do {
-                val place = DetailUser(
+                val place = User(
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLOUMN_ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLOUMN_USERNAME)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLOUMN_NAME)),
