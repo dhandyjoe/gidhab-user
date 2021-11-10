@@ -26,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbar.title = "Gidhab User"
+        binding.ivFavorite.setOnClickListener {
+            val intent = Intent(this, FavoriteActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btn.setOnClickListener {
             binding.tvStatusData.visibility = View.GONE
             binding.pbLoading.visibility = View.VISIBLE
@@ -35,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showRecycleView(userList: ArrayList<User>) {
         binding.rvUser.layoutManager = LinearLayoutManager(this)
+        binding.rvUser.hasFixedSize()
         val data = UserAdapter(userList)
         binding.rvUser.adapter = data
 
@@ -55,8 +61,9 @@ class MainActivity : AppCompatActivity() {
                     response: Response<UserResponse>
                 ) {
                     if (response.isSuccessful) {
-                        binding.pbLoading.visibility = View.GONE
                         val data = response.body()?.items
+                        Log.d("testData", data.toString())
+                        binding.pbLoading.visibility = View.GONE
                         binding.rvUser.visibility = View.VISIBLE
                         showRecycleView(data!!)
                     }

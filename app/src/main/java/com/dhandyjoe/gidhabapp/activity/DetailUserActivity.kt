@@ -3,6 +3,7 @@ package com.dhandyjoe.gidhabapp.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -12,6 +13,7 @@ import com.dhandyjoe.gidhabapp.api.RetrofitClient
 import com.dhandyjoe.gidhabapp.databinding.ActivityDetailUserBinding
 import com.dhandyjoe.gidhabapp.model.DetailUser
 import com.dhandyjoe.gidhabapp.adapter.SectionPagerAdapter
+import com.dhandyjoe.gidhabapp.database.SQLiteDatabase
 import com.dhandyjoe.gidhabapp.model.User
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -29,6 +31,8 @@ class DetailUserActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityDetailUserBinding
+    private var data: DetailUser? = null
+    private var statusFav = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +40,21 @@ class DetailUserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbarDetails.title = "Details User"
+        binding.ivFavorite.visibility = View.GONE
         val username = intent.getStringExtra(NAME)
 
         Log.d("tesUsernameDetail", username!!)
 
         showDetailUsers(username)
+
+        Log.d("favorite", data?.id.toString())
         showFollowersIndicator(username)
         showFollowingIndicator(username)
+
+        binding.ivFavorite.setOnClickListener {
+            addDeleteMovie()
+        }
+
 
         val sectionsPagerAdapter = SectionPagerAdapter(this, username)
         val viewPager: ViewPager2 = binding.viewPager
@@ -54,13 +66,13 @@ class DetailUserActivity : AppCompatActivity() {
         }.attach()
 
         supportActionBar?.elevation = 0f
-
     }
 
     private fun showDetailUsers(username: String) {
         RetrofitClient.apiInstance.getDetailUser(username).enqueue(object : Callback<DetailUser>{
             override fun onResponse(call: Call<DetailUser>, response: Response<DetailUser>) {
-                val data = response.body()
+                data = response.body()
+                statusFavorite()
                 Glide.with(this@DetailUserActivity)
                     .load(data?.avatar_url)
                     .centerCrop()
@@ -68,6 +80,7 @@ class DetailUserActivity : AppCompatActivity() {
                     .into(binding.imageDetailUser)
                 binding.tvName.text = data?.name ?: ""
                 binding.tvUsername.text = data?.login ?: ""
+                binding.ivFavorite.visibility = View.VISIBLE
             }
 
             override fun onFailure(call: Call<DetailUser>, t: Throwable) {
@@ -108,5 +121,45 @@ class DetailUserActivity : AppCompatActivity() {
                     Toast.makeText(this@DetailUserActivity, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    fun addDeleteMovie() {
+        if(statusFav) {
+            val db = SQLiteDatabase(this)
+            db.deleteFavorite(data!!)
+            iconFavorite(false)
+        } else {
+            val dataHappyPLace = DetailUser(
+                data?.id ?: 0,
+                data?.login ?: "",
+                data?.name ?: "",
+                data?.avatar_url ?: ""
+            )
+            val db = SQLiteDatabase(this)
+            db.addFavorite(dataHappyPLace)
+            iconFavorite(true)
+        }
+    }
+
+    fun iconFavorite(boolean: Boolean) {
+        if(boolean) {
+            statusFav = true
+            binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+        } else {
+            statusFav = false
+            binding.ivFavorite.setImageResource(R.drawable.ic_unfavorite)
+        }
+    }
+
+    fun statusFavorite () {
+        val dbHandler = SQLiteDatabase(this)
+        val cursor = dbHandler.queryById(data?.id.toString())
+        Log.d("favorite", data?.id.toString())
+
+        if(cursor.moveToNext()) {
+            iconFavorite(true)
+        } else {
+            iconFavorite(false)
+        }
     }
 }

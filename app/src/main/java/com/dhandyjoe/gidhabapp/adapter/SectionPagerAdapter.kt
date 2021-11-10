@@ -28,7 +28,5 @@ class SectionPagerAdapter(activity: AppCompatActivity, private val data: String)
             1 -> fragment = followingFragment
         }
         return fragment as Fragment
-
-        //tes
     }
 }
