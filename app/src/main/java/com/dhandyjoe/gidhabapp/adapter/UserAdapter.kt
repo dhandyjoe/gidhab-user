@@ -32,7 +32,7 @@ class UserAdapter(val data: ArrayList<User>): RecyclerView.Adapter<RecyclerView.
                 .into(holder.binding.ivProfileUser)
             holder.binding.tvUsernameUser.text = model.login
             holder.itemView.setOnClickListener {
-                onItemClickCallback.onItemClicked(data[position])
+                onItemClickCallback.onItemClicked(model)
             }
         }
     }

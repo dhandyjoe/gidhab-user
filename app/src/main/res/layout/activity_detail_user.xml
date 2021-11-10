@@ -21,7 +21,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_details" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_details"
+        android:contentDescription="@string/image_user" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -102,7 +103,8 @@
         android:src="@drawable/ic_unfavorite"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/status_favorite" />
 
 
 

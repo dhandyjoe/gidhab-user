@@ -1,5 +1,6 @@
 package com.dhandyjoe.gidhabapp.api
 
+import com.dhandyjoe.gidhabapp.BuildConfig
 import com.dhandyjoe.gidhabapp.model.DetailUser
 import com.dhandyjoe.gidhabapp.model.User
 import com.dhandyjoe.gidhabapp.model.UserResponse

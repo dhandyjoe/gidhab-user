@@ -15,17 +15,20 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+    companion object {
+        const val delayMilisecond: Long = 3000
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val handler = Handler(Looper.myLooper()!!)
-        handler.postDelayed({
+        val handler = Looper.myLooper()?.let { Handler(it) }
+        handler?.postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, delayMilisecond)
     }
 }

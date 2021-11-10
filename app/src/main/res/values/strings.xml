@@ -7,4 +7,12 @@
     <string name="status_no_data">no data!</string>
     <string name="name_app">Gidhab App</string>
     <string name="app_image">app-image</string>
+    <string name="search_user">Search</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting_app">setting_app</string>
+    <string name="favorite_user">favorite_user</string>
+    <string name="search">search_user</string>
+    <string name="image_user">image_user</string>
+    <string name="status_favorite">status_favorite</string>
+    <string name="image_recycleview">image_recycleview</string>
 </resources>

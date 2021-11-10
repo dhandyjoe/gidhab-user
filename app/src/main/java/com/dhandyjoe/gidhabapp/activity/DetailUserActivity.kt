@@ -97,7 +97,7 @@ class DetailUserActivity : AppCompatActivity() {
                     response: Response<ArrayList<User>>
                 ) {
                     val data = response.body()
-                    binding.tvFollowers.text = "${data?.size} followers"
+                    binding.tvFollowers.text = StringBuilder(data?.size.toString()).append(" followers")
                 }
 
                 override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
@@ -114,7 +114,7 @@ class DetailUserActivity : AppCompatActivity() {
                     response: Response<ArrayList<User>>
                 ) {
                     val data = response.body()
-                    binding.tvFollowing.text = "${data?.size} following"
+                    binding.tvFollowers.text = StringBuilder(data?.size.toString()).append(" following")
                 }
 
                 override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
